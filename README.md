@@ -91,9 +91,23 @@ public R<YourReturnType> YourMethod(/*params*/)
   //If it failed:
   return R<YourReturnType>.Err("Could not do something. There as a problem.");
   
+  //Or maybe you do something that could cause an exception:
+  try
+  {
+    //Do some code that may fail
+  }
+  catch(Exception ex)
+  {
+    //Notice that you can pass the exception to Err() method
+    //The exception will be available to the consumer if consumer wants to examine it.
+    return R<YourReturnType.Err("Could not do it this way either! There was a problem!", ex);
+  }
+  
   //else you'll have some code that produces a return object (or primitive)
   var yourNewObject = new YourReturnType();
   return R.Ok(yourNewObject);
 }```
   
-  
+Now that you've built your method this way, consumers who call YourMethod() will see that it returns an R of some T. This makes it obvious that it may fail. Remember, make sure you handle exceptions inside YourMethod(). The key is that you're making it so consumers don't have to worry about your method throwing an Exception. Instead they know it will always return an R and they can check the Success/Error of it.
+
+
