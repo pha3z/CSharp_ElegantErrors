@@ -15,10 +15,11 @@ public SomeType GetIt()
 {
   try{
     var data = MakeRequest();
-    //... code here
+    //.. code here
     //.. and more code here
-    var SomeObject = Transform(data);
-    return someObject;
+    //.. and more code still
+    //.. you know what I'm talking about
+    return Transform(data);
   }
   catch(Exception ex)
   {
@@ -36,13 +37,15 @@ public R<SomeType> GetIt()
   if(r.isErr)
     return R<SomeType>.Err("Could not GetIt!", r);
     
-  //... code here
+  //.. code here
   //.. and more code here
-  var SomeObject = Transform(data);
-  return R.Ok(someObject);
+  //.. and more code still
+  //.. you know what I'm talking about
+  return R.Ok(Transform(data));
 }
 ```
 
+## Why? Because Exceptions Should be Exceptional
 Over-reliance on Exceptions makes ugly, brittle code that can even come with performance penalties. Here are some guidelines for using exceptions:
 
 #### Do NOT use Exceptions for Normal Problem Domain Logic
