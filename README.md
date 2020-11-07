@@ -66,3 +66,34 @@ For example: Imagine you write a web server that handles tens of thousands of re
 #### Exceptions are Hard to Follow
 
 Developers who have written middleware or code that depends on a lot of calls to other APIs will be most familiar with this problem. A large portion of your code will involve methods which invoke some other method that might fail.  If the failure happens, you will probably want to bail immediately while returning some kind of response further up the stack. Only when things work successfully will you want to continue forward evaluating more code. Therefore, the code should follow that pattern to read like a book. Fail conditions should come first, followed by success conditions. Exceptions reverse this by assuming success and adding failure handling at the very end of a long indented block. Its NOT readable. If you think it is, you've simply gotten accustomed to a bad pattern. You need to break the habit and use a better one. Elegant Errors makes that possible.
+
+## How To Use Elegant Errors
+
+Include the ReturnResult.cs file in your project. It adds these classes:
+- R
+- R&lt;T&gt;
+
+I named them the single letter R, because I didn't want to see "Result" or "Result&lt;T&gt;" everywhere in my code, but you can rename the classes to whatever you want.
+
+You will use this anytime you want to call a method that you expect to have likely failure conditions.
+
+```csharp
+public R<YourReturnType> YourMethod(/*params*/)
+{
+  //Write your code here.
+  //If an exception occurs, don't leave it unhandled only to pass back up the stack.
+  //That leaves the behavior of this method ambiguous. If your method can cause exceptions
+  //then you MUST document that in the method signature so that consumers can know it may throw an exception.
+  //But that requires consumers to check the documentation and handle it, which slows them down.
+  //Instead of dealing with all that, just handle the exception here and return Ok or Err.
+  
+  //Do Something.
+  //If it failed:
+  return R<YourReturnType>.Err("Could not do something. There as a problem.");
+  
+  //else you'll have some code that produces a return object (or primitive)
+  var yourNewObject = new YourReturnType();
+  return R.Ok(yourNewObject);
+}```
+  
+  
