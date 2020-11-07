@@ -1,6 +1,41 @@
 # C# Elegant Errors
 Elegant Errors lets you write cleaner, more readable code by eliminating reliance on Exception Propagation
 
+Stop writing code like this:
+
+```csharp
+public SomeType GetIt()
+{
+  try{
+    var data = MakeRequest();
+    //... code here
+    //.. and more code here
+    var SomeObject = Transform(data);
+    return someObject;
+  }
+  catch(Exception ex)
+  {
+    throw new CustomException("Could not GetIt.", ex)
+  }
+
+}
+```
+
+Start writing code like this:
+```csharp
+public R<SomeType> GetIt()
+{
+  var r = MakeRequest();
+  if(r.isErr)
+    return R<SomeType>.Err("Could not GetIt!", r);
+    
+  //... code here
+  //.. and more code here
+  var SomeObject = Transform(data);
+  return R.Ok(someObject);
+}
+```
+
 Over-reliance on Exceptions makes ugly, brittle code that can even come with performance penalties. Here are some guidelines for using exceptions:
 
 #### Do NOT use Exceptions for Normal Problem Domain Logic
