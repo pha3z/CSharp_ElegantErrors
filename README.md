@@ -136,3 +136,7 @@ r.agg_errors //the err messages from any other Rs that were passed into the curr
 r.AllErrors() //Concatenates the main err string with other aggregated error strings
 r.JoinErrors(separator) //Joins all err strings together into a single string
 ```
+
+## You Will Still need SOME Exception Handling
+
+You will still need try/catch blocks in upper layers of your code to handle legitimate exceptions that weren't handled as R Errors. If you leverage these patterns correctly, you will have more explicit code. There will be a clearer distinction between code that is handling real unexpected program failures versus code that is handling fail conditions that can't always complete.
