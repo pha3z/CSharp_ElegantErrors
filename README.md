@@ -75,7 +75,9 @@ Include the ReturnResult.cs file in your project. It adds these classes:
 
 I named them the single letter R, because I didn't want to see "Result" or "Result&lt;T&gt;" everywhere in my code, but you can rename the classes to whatever you want.
 
-You will use this anytime you want to call a method that you expect to have likely failure conditions.
+Whenever you define a method that might normally fail due to some kind of undesirably situation, instead of throwing an exception, you will handle the exception internally. Then you will return R.Err().  You could also return R.Err() for any failure reason. It doesn't have to be due to something that would have caused an exception.
+
+Write your method like this:
 
 ```csharp
 public R<YourReturnType> YourMethod(/*params*/)
@@ -106,8 +108,17 @@ public R<YourReturnType> YourMethod(/*params*/)
   //else you'll have some code that produces a return object (or primitive)
   var yourNewObject = new YourReturnType();
   return R.Ok(yourNewObject);
-}```
+}
+```
   
 Now that you've built your method this way, consumers who call YourMethod() will see that it returns an R of some T. This makes it obvious that it may fail. Remember, make sure you handle exceptions inside YourMethod(). The key is that you're making it so consumers don't have to worry about your method throwing an Exception. Instead they know it will always return an R and they can check the Success/Error of it.
 
+You can call your method like this:
+```CSharp
 
+var r = YourMethod(/*params*/);
+if(r.isErr)
+  //Handle the error here.  You could even return a new type of error to a caller.
+  
+//Else its a success.  Write your code here.
+```
