@@ -83,11 +83,8 @@ Whenever you define a method that might normally fail due to some kind of undesi
 public R<YourReturnType> YourMethod(/*params*/)
 {
   //Write your code here.
-  //If an exception occurs, don't leave it unhandled only to pass back up the stack.
-  //That leaves the behavior of this method ambiguous. If your method can cause exceptions
-  //then you MUST document that in the method signature so that consumers can know it may throw an exception.
-  //But that requires consumers to check the documentation and handle it, which slows them down.
-  //Instead of dealing with all that, just handle the exception here and return Ok or Err.
+  //If an exception occurs, don't leave it unhandled to pass back up the stack (Unless its a real legitimate program error)
+  //Instead, return an R object with an error
   
   //Do Something.
   //If it failed:
@@ -112,7 +109,7 @@ public R<YourReturnType> YourMethod(/*params*/)
 ```
   
 #### Calling Your Custom Method
-Now that you've built your methodas above, consumers who call YourMethod() will see that it returns an R of some T. This makes it obvious that it may fail. Remember, make sure you handle exceptions inside YourMethod(). The key is that you're making it so consumers don't have to worry about your method throwing an Exception. Instead they know it will always return an R and they can check the Success/Error of it.
+Consumers who call YourMethod() will see that it returns an R of some T. This makes it self-documenting, because it is obvious that it has possible fail conditions that must be handled.
 
 You can call your method like this:
 ```CSharp
