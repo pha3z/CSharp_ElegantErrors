@@ -50,7 +50,7 @@ Over-reliance on Exceptions makes ugly, brittle code that can even come with per
 
 #### Do NOT use Exceptions for Normal Problem Domain Logic
 
-For instance, when making API requests to a network, sometimes the network or server becomes unavailable (commonly in fact). This is an excepted and normal occurrence that you, the developer, should expect and plan for. When a network error occurs in an API request you've made, you may need to unwind up the stack several times to get back to an original method that will branch based on the failure. Depending on an exception to propagate up the stack for this scenario will make your code very ugly. Additionally, there is a strong tendency to get lazy and simply let try/catch blocks handle every single error case. This makes the code even harder to reason about.
+For instance, when making API requests to a network, sometimes the network or server becomes unavailable (commonly in fact). This is a normal occurrence that you, the developer, should expect and plan for. When a network error occurs in an API request you've made, you may need to unwind up the stack several times to get back to an original method that will branch based on the failure. Depending on an exception to propagate up the stack for this scenario leaves ambiguity about everything that happens in between. Additionally, there is a strong tendency to get lazy and simply let try/catch blocks handle every single error case. This makes the code even harder to reason about.
 
 #### Exceptions are for Real Program Failures or Mistakes, not Conditional Branching
 
