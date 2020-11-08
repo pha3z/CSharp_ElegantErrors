@@ -3,7 +3,7 @@ Elegant Errors lets you write cleaner, more readable code by eliminating relianc
 
 It will be most useful to you if:
 - You write a lot of code that depends on API calls
-- You write a lot of code that depends on methods that will frequently fail for predictable reasons
+- You write a lot of code that depends on methods that will fail for predictable reasons (such as unreachable network endpoint)
 - You want your code to read in the same order it evaluates it.
 - You want fewer bugs
 - You want to be more explicit about where real program failures may occur
