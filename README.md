@@ -99,7 +99,7 @@ public R<YourReturnType> YourMethod(/*params*/)
   {
     //Notice that you can pass the exception to Err() method
     //The exception will be available to the consumer if consumer wants to examine it.
-    return R<YourReturnType.Err("Could not do it this way either! There was a problem!", ex);
+    return R<YourReturnType>.Err("Could not do it this way either! There was a problem!", ex);
   }
   
   //else you'll have some code that produces a return object (or primitive)
