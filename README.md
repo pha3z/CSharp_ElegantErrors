@@ -144,3 +144,5 @@ You will still need try/catch blocks in upper layers of your code to handle legi
 ## DO NOT use the R Object Everywhere
 
 There's no reason to use the R object in methods that aren't expected to fail. It would do nothing more than obvuscate your code. By using R return type only for methods that actually have regular failure conditions, you will show intent within your code. It will become easy to see which functions lead to branches with fail conditions that need to be handled.
+
+Also, you might not want use the R object when a fail condition can be succinctly described. For instance, if your function always returns a positive non-zero integer on success, then you could simply return a 0 for failure cases... or a negative number. Do whatever makes your code light and easiest to understand at a quick glance.
