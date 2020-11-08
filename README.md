@@ -140,3 +140,7 @@ r.JoinErrors(separator) //Joins all err strings together into a single string
 ## You Will Still need SOME Exception Handling
 
 You will still need try/catch blocks in upper layers of your code to handle legitimate exceptions that weren't handled as R Errors. If you leverage these patterns correctly, you will have more explicit code. There will be a clearer distinction between code that is handling real unexpected program failures versus code that is handling fail conditions that can't always complete.
+
+## DO NOT use the R Object Everywhere
+
+There's no reason to use the R object in methods that aren't expected to fail. It would do nothing more than obvuscate your code. By using R return type only for methods that actually have regular failure conditions, you will show intent within your code. It will become easy to see which functions lead to branches with fail conditions that need to be handled.
