@@ -34,8 +34,8 @@ Start writing code like this:
 public R<SomeType> GetIt()
 {
   var r = MakeRequest();
-  if(r.isErr)
-    return R<SomeType>.Err("Could not GetIt!", r);
+    if(r.isErr)
+      return R<SomeType>.Err("Could not GetIt!", r);
     
   //.. code here
   //.. and more code here
